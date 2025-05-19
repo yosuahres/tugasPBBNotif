@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class NotificationService {
   static Future<void> initializeNotification() async {
@@ -114,4 +115,25 @@ static Future<void> createNotification({
         : null,
   );
 }
+
+  //firebase messaging
+  static Future<void> initializeFirebaseMessaging() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    await messaging.requestPermission();
+
+    String? token = await messaging.getToken();
+    debugPrint('FCM Token: $token');
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (message.notification != null) {
+        createNotification(
+          id: DateTime.now().millisecondsSinceEpoch.remainder(100000),
+          title: message.notification!.title ?? 'Notification',
+          body: message.notification!.body ?? '',
+          summary: 'Push Notification',
+        );
+      }
+    });
+  } 
 }

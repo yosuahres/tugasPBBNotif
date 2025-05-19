@@ -10,10 +10,10 @@ import 'package:notif_app/screens/home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService.initializeNotification();
+  // await NotificationService.initializeFirebaseMessaging();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
 
   runApp(const MainApp());
 }
