@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:notif_app/services/firestore.dart';
 import 'package:notif_app/services/notification_service.dart';
-import 'package:intl/intl.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -98,6 +97,7 @@ class _HomeState extends State<Home> {
                     title: 'Note Added',
                     body: 'A new note was successfully added.',
                     summary: 'Firestore',
+                    notificationLayout: NotificationLayout.Inbox,
                   );
                 } else {
                   firestoreService.updateNote(docId, noteController.text);
@@ -106,6 +106,7 @@ class _HomeState extends State<Home> {
                     title: 'Note Updated',
                     body: 'Your note was successfully updated.',
                     summary: 'Firestore',
+                    notificationLayout: NotificationLayout.Inbox,
                   );
                 }
 
@@ -162,6 +163,7 @@ class _HomeState extends State<Home> {
                             title: 'Note Deleted',
                             body: 'A note was successfully deleted.',
                             summary: 'Firestore',
+                            notificationLayout: NotificationLayout.Inbox,
                           );
                         },
                       ),
